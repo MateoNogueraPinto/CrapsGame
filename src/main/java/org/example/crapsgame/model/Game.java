@@ -9,6 +9,8 @@ public class Game {
     Dice dice1, dice2;
 
     public Game() {
+        this.dice1 = new Dice();
+        this.dice2 = new Dice();
         this.shootCount = 0;
         this.shoot = 0;
         this.point = 0;
