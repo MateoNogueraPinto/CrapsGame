@@ -56,6 +56,7 @@ public class Game {
         this.dice1.rollDice();
         this.dice2.rollDice();
         shootCount++;
+        this.shoot = this.dice1.getValue() + this.dice2.getValue();
     }
 
     public Dice getDice1() {
