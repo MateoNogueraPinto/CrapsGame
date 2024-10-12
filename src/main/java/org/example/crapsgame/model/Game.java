@@ -34,7 +34,7 @@ public class Game {
 
     public boolean isWin() {
         int value = this.dice1.getValue() + this.dice2.getValue();
-        if(shootCount == 1 && value == 7 || value == 11) {
+        if(shootCount == 1 && (value == 7 || value == 11)) {
             return this.win = true;
         } else if (shootCount > 1 && value == point) {
             return this.lose = true;
@@ -44,7 +44,7 @@ public class Game {
 
     public boolean isLose() {
         int value = this.dice1.getValue() + this.dice2.getValue();
-        if(shootCount == 1 && value == 2 || value == 3 || value == 12) {
+        if(shootCount == 1 && (value == 2 || value == 3 || value == 12)) {
             return this.lose = true;
         } else if (shootCount > 1 && value == 7) {
             return this.lose = true;
