@@ -62,6 +62,7 @@ public class GameController {
                 6. Si sacas el 'punto' antes de un 7, ganas.
                 7. Si sacas un 7 antes de tu 'punto', pierdes.
                 """);
+    }
 
     public void updateGameInterface() {
         this.updateShot();
