@@ -1,5 +1,8 @@
 package org.example.crapsgame.model;
 
+import org.example.crapsgame.model.exceptions.LostAfterFirstShotException;
+import org.example.crapsgame.model.exceptions.LostInFirstShotException;
+
 public class Game {
     private int shootCount;
     private int shoot;
@@ -42,14 +45,16 @@ public class Game {
         return this.win;
     }
 
-    public boolean isLose() {
+    public boolean isLose() throws LostInFirstShotException, LostAfterFirstShotException {
         int value = this.dice1.getValue() + this.dice2.getValue();
         if(shootCount == 1 && (value == 2 || value == 3 || value == 12)) {
-            return this.lose = true;
+            this.lose = true;
+            throw new LostInFirstShotException("Perdiste en el primer tiro :(");
         } else if (shootCount > 1 && value == 7) {
-            return this.lose = true;
+            this.lose = true;
+            throw new LostAfterFirstShotException("Perdiste después del primer tiro :(");
         }
-        return this.lose;
+        return false;
     }
 
     public void rollDices() {

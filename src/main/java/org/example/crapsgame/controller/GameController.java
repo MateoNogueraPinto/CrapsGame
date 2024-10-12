@@ -6,6 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import org.example.crapsgame.model.Dice;
 import org.example.crapsgame.model.Game;
+import org.example.crapsgame.model.exceptions.LostAfterFirstShotException;
+import org.example.crapsgame.model.exceptions.LostInFirstShotException;
 import org.example.crapsgame.view.alert.AlertBox;
 
 import java.util.ArrayList;
@@ -66,14 +68,28 @@ public class GameController {
 
     public void updateGameInterface() {
         this.updateShot();
-
         if (currentGame.isWin()) {
             updateWins();
-        } else if (currentGame.isLose()) {
-            updateLosses();
         } else if (pointLabel.getText().isEmpty()) {
             updatePoint();
         }
+
+        try {
+            currentGame.isLose();
+        } catch (LostInFirstShotException e) {
+            AlertBox alert = new AlertBox();
+            alert.showMessage("Perdedor", e.getMessage(), """
+                    Perdiste porque sacaste 2, 3 o 12 en el primer tiro
+                    """);
+            updateLosses();
+        } catch (LostAfterFirstShotException e) {
+            AlertBox alert = new AlertBox();
+            alert.showMessage("Perdedor", e.getMessage(), """
+                    Perdiste porque sacaste 7 antes de sacar el punto
+                    """);
+            updateLosses();
+        }
+
 
     }
 
